@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{lesson.name}}
+{% endblock title %}
+
+{% block nav %}
+{% endblock nav %}
+
+{% block content %}
+<div class="container">
+    <video controls
+            controlsList="nodownload"
+            poster="{{ lesson.thumbnail.url }}"
+            src="/static{{ lesson.video_url }}"
+            width="300"
+            height="200">
+        Sorry, your browser doesn't support embedded videos.
+    </video>
+</div>
+{% endblock content %}

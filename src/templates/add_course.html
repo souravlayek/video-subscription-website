@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Add Course
+{% endblock title %}
+{% block nav %}
+    <div class="navitems"><a href="#">My courses</a></div>
+    {% if request.user.is_authenticated %}
+    {% if request.user.is_staff %}
+    <div class="navitems"><a href="{% url 'addCourse' %}">Add course</a></div>
+    {% endif %}
+    <div class="navitems"><a href="#">Profile</a></div>
+    {% else %}
+    <div class="navitems"><a href="{% url 'account_signup' %}">Sign in</a></div>
+    {% endif %}
+    </div>
+{% endblock nav %}
+{% block content %}
+<div class="container">
+<div class="jumbotron">
+<h1 class="text-center">Add Course</h1>
+<form method="post">
+{% csrf_token %}
+{{form|crispy}}
+<button class="btn btn-primary" type="submit">Add Course</button>
+</form>
+</div>
+</div>
+
+{% endblock content %}

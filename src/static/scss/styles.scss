@@ -1,0 +1,30 @@
+// font-family: 'Playfair Display', serif;
+// font-family: 'Roboto', sans-serif;
+
+body {
+  margin: 0;
+  padding: 0;
+  background-origin: border-box;
+  font-family: "Roboto", sans-serif;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  .logo {
+    font-size: 1.5rem;
+    font-family: "Playfair Display", serif;
+  }
+  .navlinks {
+    display: flex;
+    align-items: center;
+    .navitems {
+      margin: 0 1rem;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+}

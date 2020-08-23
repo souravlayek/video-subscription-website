@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Home
+{% endblock title %}
+{% block nav %}
+    {% if request.user.is_authenticated %}
+    {% if request.user.is_staff %}
+    <div class="navitems"><a href="{% url 'courseList' %}">My courses</a></div>
+    <div class="navitems"><a href="{% url 'requestList' %}">Request List</a></div>
+    <div class="navitems"><a href="{% url 'addCourse' %}">Add course</a></div>
+    {% endif %}
+    <div class="navitems"><a href="{% url 'profile' %}">Profile</a></div>
+    {% else %}
+    <div class="navitems"><a href="{% url 'account_signup' %}">Sign up</a></div>
+    {% endif %}
+{% endblock nav %}
+{% block content %}
+<div class="container">
+    {% if courses %}
+        {% for i in courses %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{i.name}}</h5>
+                <p class="card-text">{{i.description}}</p>
+                <a href="{{i.get_absolute_url}}" class="card-link">Visit courses</a>
+                <a href="{% url 'requestCourse' i.slug %}" class="card-link">Request</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+    <h1>no courses found</h1>
+    {% endif %}
+</div>
+{% endblock content %}

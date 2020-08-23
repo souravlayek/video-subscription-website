@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Requests
+{% endblock title %}
+{% block content %}
+<div class="container">
+<div class="jumbotron">
+<div class="lesson d-flex">
+{% for i in qs %}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{i.course.name}}</h5>
+    <p class="card-text">{{i.requested_user.first_name}} {{i.requested_user.last_name}}</p>
+    <a href="{% url 'acceptRequest' i.id %}" class="btn btn-success">accept</a>
+  </div>
+</div>
+{% endfor %}
+{% endblock content %}

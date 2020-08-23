@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+{{course.name}}
+{% endblock title %}
+{% block nav %}
+    {% if request.user.is_authenticated %}
+    {% if request.user.is_staff %}
+    <div class="navitems"><a href="{% url 'addCourse' %}">Add course</a></div>
+    <div class="navitems"><a href="{% url 'addLesson' course.slug %}">Add Lesson</a></div>
+    {% endif %}
+    <div class="navitems"><a href="{% url 'profile' %}">Profile</a></div>
+    {% else %}
+    <div class="navitems"><a href="{% url 'account_signup' %}">Sign in</a></div>
+    {% endif %}
+{% endblock nav %}
+{% block content %}
+<div class="container">
+<div class="jumbotron">
+<h1 class="text-center">{{course.name}}</h1>
+<div class="lesson d-flex">
+{% if permited %}
+{% for lesson in course.get_lesson %}
+<div class="card" style="width: 18rem;">
+  <img src="{{lesson.thumbnail.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{lesson.name}}</h5>
+    <p class="card-text">{{lesson.description}}</p>
+    <a href="{{lesson.get_absolute_url}}" class="btn btn-primary">Visit Here</a>
+  </div>
+</div>
+{% endfor %}
+{% else %}
+<a href="{% url 'requestCourse' course.slug %}" class="btn btn-primary">Request to learn</a>
+{% endif %}
+</div>
+</div>
+</div>
+{% endblock content %}
